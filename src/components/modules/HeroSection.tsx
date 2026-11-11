@@ -1,9 +1,8 @@
 import React from 'react';
+import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../ui/Button';
 import { Terminal, ShieldCheck, ArrowRight, Server, Database, FileCheck } from 'lucide-react';
-import symbolImg from '../../assets/brand/trimindslabs-symbol.png';
-import primaryLockupImg from '../../assets/brand/trimindslabs-primary-lockup.png';
 
 interface HeroSectionProps {
   onExploreState: () => void;
@@ -40,14 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="p-3.5 sm:p-4 bg-[#010C1B] border border-[#263449] rounded-2xl shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
               <div className="flex items-center gap-3.5">
                 <div className="p-1.5 bg-[#07111F] border border-[#263449] rounded-xl shadow-[0_0_20px_rgba(255,106,0,0.25)] shrink-0">
-                  <img
-                    src={symbolImg}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/trimindslabs-symbol.png';
-                    }}
-                    alt="TRIMINDSLABS Geometric Symbol"
-                    className="h-10 sm:h-12 w-auto object-contain"
-                  />
+                  <BrandIdentity variant="symbol" priority className="h-10 sm:h-12 w-auto" />
                 </div>
                 <div>
                   <div className="flex items-center tracking-tight leading-none">
@@ -60,9 +52,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
               </div>
               <div className="flex items-center gap-2 self-start sm:self-auto">
-                <span className="px-2.5 py-1 text-[10px] font-mono bg-[#FF6A00]/10 text-[#FF8A24] border border-[#FF6A00]/30 rounded-md font-semibold">
-                  Brand Option A
-                </span>
                 <span className="px-2.5 py-1 text-[10px] font-mono bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30 rounded-md">
                   Active Standard
                 </span>
