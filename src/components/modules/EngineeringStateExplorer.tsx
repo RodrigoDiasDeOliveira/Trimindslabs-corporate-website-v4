@@ -9,7 +9,7 @@ import {
   fetchAuditSummary,
   fetchEcosystemObservations,
   fetchDeploymentTelemetry,
-  AUDIT_API_BASE
+  getSessionAuditData
 } from '../../services/auditService';
 import { StatusBadge } from '../ui/StatusBadge';
 import { DataMetric } from '../ui/DataMetric';
@@ -34,11 +34,11 @@ import {
 export const EngineeringStateExplorer: React.FC = () => {
   const { language, t } = useLanguage();
 
-  const [summary, setSummary] = useState<AuditSummary | null>(null);
-  const [observations, setObservations] = useState<RepositoryObservation[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [summary, setSummary] = useState<AuditSummary | null>(() => getSessionAuditData().summary);
+  const [observations, setObservations] = useState<RepositoryObservation[]>(() => getSessionAuditData().observations || []);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [sourceProvenance, setSourceProvenance] = useState<'LIVE_AUDIT_API' | 'CANONICAL_SNAPSHOT'>('LIVE_AUDIT_API');
+  const [sourceProvenance, setSourceProvenance] = useState<'LIVE_AUDIT_API' | 'SESSION_OBSERVATION' | 'AWAITING_AUDIT'>(getSessionAuditData().observations ? 'SESSION_OBSERVATION' : 'AWAITING_AUDIT');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Search and Filters
@@ -62,9 +62,9 @@ export const EngineeringStateExplorer: React.FC = () => {
         fetchEcosystemObservations(force),
       ]);
 
-      setSummary(sumResult.data);
-      setObservations(obsResult.data || []);
-      setSourceProvenance(sumResult.source === 'LIVE_AUDIT_API' && obsResult.source === 'LIVE_AUDIT_API' ? 'LIVE_AUDIT_API' : 'CANONICAL_SNAPSHOT');
+      if (sumResult.data) setSummary(sumResult.data);
+      if (obsResult.data?.length) setObservations(obsResult.data);
+      setSourceProvenance(obsResult.source === 'LIVE_AUDIT_API' ? 'LIVE_AUDIT_API' : obsResult.data?.length ? 'SESSION_OBSERVATION' : 'AWAITING_AUDIT');
 
       if (sumResult.error || obsResult.error) {
         setErrorMessage(sumResult.error || obsResult.error || null);
@@ -77,9 +77,6 @@ export const EngineeringStateExplorer: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    void loadData(false);
-  }, [loadData]);
 
   // Inspect deployment service
   const handleInspectDeployment = async (depId: string) => {
@@ -124,7 +121,7 @@ export const EngineeringStateExplorer: React.FC = () => {
                   ? 'bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30'
                   : 'bg-[#FFB15C]/10 text-[#FFB15C] border border-[#FFB15C]/30'
               }`}>
-                {sourceProvenance === 'LIVE_AUDIT_API' ? t('explorer.liveBadge', 'LIVE AUDIT API CONNECTED') : t('explorer.cachedBadge', 'CANONICAL SNAPSHOT')}
+                {sourceProvenance === 'LIVE_AUDIT_API' ? t('explorer.liveBadge', 'LIVE AUDIT API CONNECTED') : sourceProvenance === 'SESSION_OBSERVATION' ? 'SESSION OBSERVATION' : 'AWAITING FIRST AUDIT'}
               </span>
             </div>
 
@@ -153,10 +150,10 @@ export const EngineeringStateExplorer: React.FC = () => {
               variant="primary"
               size="sm"
               icon={<RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />}
-              disabled={refreshing}
+              disabled={refreshing || loading}
               onClick={() => void loadData(true)}
             >
-              {t('explorer.refreshButton', 'Force Refresh Telemetry')}
+              {refreshing || loading ? 'COLLECTING FROM AUDIT…' : 'Atualizar auditoria'}
             </Button>
           </div>
         </div>
@@ -181,7 +178,7 @@ export const EngineeringStateExplorer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <DataMetric
             label={t('explorer.cardStatus', 'Audit Engine Status')}
-            value={summary?.system_status || 'UNAVAILABLE'}
+            value={summary?.system_status || (refreshing ? 'COLLECTING' : observations.length ? 'OBSERVED' : 'AWAITING FIRST AUDIT')}
             subtext="Ecosystem Audit REST API"
             provenance="europe-west1 Cloud Run"
             accent
@@ -334,7 +331,7 @@ export const EngineeringStateExplorer: React.FC = () => {
                 {filteredObservations.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="py-12 text-center text-xs text-[#8190A3]">
-                      {t('explorer.noReposFound', 'No repositories found matching your query.')}
+                      {refreshing ? 'Collecting real observations from Ecosystem Audit…' : observations.length === 0 ? 'No observations in this session. Click Atualizar auditoria to collect from GitHub.' : t('explorer.noReposFound', 'No repositories found matching your query.')}
                     </td>
                   </tr>
                 ) : (
