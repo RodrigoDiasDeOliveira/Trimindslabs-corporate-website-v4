@@ -15,7 +15,7 @@ export const GITHUB_API_URL = 'https://api.github.com/users/RodrigoDiasDeOliveir
 
 export interface AuditFetchResult<T> {
   data: T | null;
-  source: 'LIVE_AUDIT_API' | 'CANONICAL_SNAPSHOT';
+  source: 'LIVE_AUDIT_API' | 'SESSION_OBSERVATION' | 'UNAVAILABLE';
   timestamp: string;
   error?: string | null;
 }
@@ -30,16 +30,12 @@ let cachedDeployments: Record<string, DeploymentTelemetry> = {};
  */
 export async function fetchAuditSummary(forceRefresh = false): Promise<AuditFetchResult<AuditSummary>> {
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(new Error('Audit summary request timed out')), 30000);
 
     const endpoint = `${AUDIT_API_BASE}/api/v1/audit/summary?force_refresh=${forceRefresh}&_ts=${Date.now()}`;
     const response = await fetch(endpoint, {
       headers: { Accept: 'application/json' },
       cache: 'no-store',
-      signal: controller.signal,
     });
-    clearTimeout(timeout);
 
     if (!response.ok) {
       throw new Error(`Audit API responded with HTTP status ${response.status}`);
@@ -60,7 +56,7 @@ export async function fetchAuditSummary(forceRefresh = false): Promise<AuditFetc
     const msg = err instanceof Error ? err.message : 'Network error';
     return {
       data: cachedSummary,
-      source: 'CANONICAL_SNAPSHOT',
+      source: cachedSummary ? 'SESSION_OBSERVATION' : 'UNAVAILABLE',
       timestamp: cachedSummary?.last_audit_timestamp || '',
       error: `Live audit summary unavailable (${msg}). ${cachedSummary ? 'Displaying previously received live data.' : 'No verified data available.'}`,
     };
@@ -72,16 +68,12 @@ export async function fetchAuditSummary(forceRefresh = false): Promise<AuditFetc
  */
 export async function fetchEcosystemObservations(forceRefresh = false): Promise<AuditFetchResult<RepositoryObservation[]>> {
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(new Error('Audit observations request timed out')), 30000);
 
     const endpoint = `${AUDIT_API_BASE}/api/v1/audit/ecosystem/observations?force_refresh=${forceRefresh}&_ts=${Date.now()}`;
     const response = await fetch(endpoint, {
       headers: { Accept: 'application/json' },
       cache: 'no-store',
-      signal: controller.signal,
     });
-    clearTimeout(timeout);
 
     if (!response.ok) {
       throw new Error(`Observations API responded with HTTP ${response.status}`);
@@ -101,7 +93,7 @@ export async function fetchEcosystemObservations(forceRefresh = false): Promise<
     const msg = err instanceof Error ? err.message : 'Network error';
     return {
       data: cachedObservations || [],
-      source: 'CANONICAL_SNAPSHOT',
+      source: cachedObservations ? 'SESSION_OBSERVATION' : 'UNAVAILABLE',
       timestamp: '',
       error: `Live audit observations unavailable (${msg}). ${cachedObservations ? 'Displaying previously received live data.' : 'No verified data available.'}`,
     };
@@ -129,3 +121,8 @@ export async function fetchDeploymentTelemetry(deploymentId: string): Promise<De
   return null;
 }
 
+
+/** Last verified observations remain in memory only for the current page session. */
+export function getSessionAuditData() {
+  return { summary: cachedSummary, observations: cachedObservations };
+}
