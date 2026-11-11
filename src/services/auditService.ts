@@ -59,7 +59,7 @@ export async function fetchAuditSummary(forceRefresh = false): Promise<AuditFetc
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Network error';
     return {
-      data: cachedSummary as AuditSummary,
+      data: cachedSummary,
       source: 'CANONICAL_SNAPSHOT',
       timestamp: cachedSummary?.last_audit_timestamp || '',
       error: `Live audit summary unavailable (${msg}). ${cachedSummary ? 'Displaying previously received live data.' : 'No verified data available.'}`,
@@ -68,7 +68,7 @@ export async function fetchAuditSummary(forceRefresh = false): Promise<AuditFetc
 }
 
 /**
- * Fetch live 32 repository observations from Ecosystem Audit
+ * Fetch live repository observations from Ecosystem Audit
  */
 export async function fetchEcosystemObservations(forceRefresh = false): Promise<AuditFetchResult<RepositoryObservation[]>> {
   try {
