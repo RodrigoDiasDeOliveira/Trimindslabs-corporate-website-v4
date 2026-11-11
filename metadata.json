@@ -1,0 +1,6 @@
+{
+  "name": "TRIMINDSLABS Corporate Platform — Next Generation",
+  "description": "TRIMINDSLABS — Engineering Intelligent Systems. Corporate identity, product catalog, technical architecture, and real operational state exploration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

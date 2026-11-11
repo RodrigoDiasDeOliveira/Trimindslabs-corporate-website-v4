@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* TRIMINDSLABS Orange Engineering Palette */
+  --color-primary: #FF6A00;
+  --color-primary-hover: #FF8A24;
+  --color-accent: #FFB15C;
+
+  --color-background: #07111F;
+  --color-surface: #111C2B;
+  --color-surface-elevated: #172438;
+  --color-surface-highlight: #1F304B;
+  --color-border: #263449;
+  --color-border-light: #374B67;
+
+  --color-text-primary: #F4F7FA;
+  --color-text-secondary: #AAB7C7;
+  --color-text-muted: #8190A3;
+  --color-text-inverse: #07111F;
+
+  --color-success: #22C55E;
+  --color-warning: #FBBF24;
+  --color-error: #EF4444;
+  --color-information: #38BDF8;
+
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbars for data tables and code inspection */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07111F;
+}
+::-webkit-scrollbar-thumb {
+  background: #263449;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8A24;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #FF8A24;
+  outline-offset: 2px;
+}

@@ -1,0 +1,1181 @@
+# PROMPT 01 — TRIMINDSLABS CORPORATE PLATFORM — NEXT GENERATION
+## Sprint 01 — Architectural Foundation, Domain Model, Design System & Corporate Experience
+
+---
+
+# 1. CONTEXTO E OBJETIVO
+
+Estamos iniciando o desenvolvimento de uma nova plataforma corporativa para a **TRIMINDSLABS**, independente da atual versão V3.
+
+**Nome do projeto:** TRIMINDSLABS Corporate Platform — Next Generation
+
+**Repositório pretendido:** `TRIMINDSLABS-CORPORATE-PLATFORM`
+
+**Organização GitHub:** `RodrigoDiasDeOliveira`
+
+**Identidade institucional oficial:**
+
+TRIMINDSLABS — Engineering Intelligent Systems.
+
+Repositório da versão anterior, que deverá permanecer preservado:
+
+https://github.com/RodrigoDiasDeOliveira/trimindslabs-corporate-website-v3
+
+A V3 deve continuar funcionando como referência histórica, funcional e alternativa de rollback.
+
+Não modificar, migrar, sobrescrever ou interferir no repositório V3, em seu pipeline, no domínio corporativo atual ou em seus ambientes de produção.
+
+O novo projeto deverá ser desenvolvido de maneira independente.
+
+## 1.1. Objetivo
+
+Construir uma **Corporate Engineering & Product Intelligence Platform** que represente a identidade da TRIMINDSLABS, seu portfólio de produtos, sua engenharia e a evolução de seu ecossistema tecnológico.
+
+A plataforma deverá apresentar quatro dimensões:
+
+1. Corporate Identity.
+2. Product Catalog.
+3. Technical Knowledge.
+4. Operational Intelligence.
+
+Além dessas quatro dimensões, deverá preservar uma capacidade funcional já existente na V3: o mecanismo de consulta do estado dos repositórios, acessado atualmente pelo link **Access Engineering State**.
+
+O objetivo é construir uma estrutura capaz de crescer continuamente, incorporando novos produtos, versões, documentos, arquiteturas e informações operacionais sem exigir modificações recorrentes nos componentes centrais da aplicação.
+
+**Princípio central:**
+
+A interface deve refletir a realidade técnica do ecossistema TRIMINDSLABS, não criar uma representação artificial dela.
+
+---
+
+# 2. DIRETRIZ DE IDENTIDADE VISUAL — TRIMINDSLABS ORANGE ENGINEERING
+
+A nova plataforma deverá adotar a identidade visual:
+
+**TRIMINDSLABS Orange Engineering — Balanced / Dark-first**
+
+A direção visual deve transmitir:
+
+- Energia.
+- Inteligência.
+- Engenharia.
+- Precisão.
+- Confiança.
+- Inovação tecnológica.
+- Maturidade empresarial.
+- Sofisticação técnica.
+
+Não utilizar uma estética genérica de startup, template de agência digital ou interface excessivamente decorativa.
+
+O laranja deverá funcionar como elemento de identidade e hierarquia visual, não como preenchimento indiscriminado de toda a interface.
+
+## 2.1. Paleta oficial
+
+### Cores primárias
+
+| Token | Nome | HEX | Responsabilidade |
+|---|---|---|---|
+| Primary Orange | Electric Orange | `#FF6A00` | Ações principais e identidade |
+| Secondary Orange | Signal Orange | `#FF8A24` | Hover, ícones e destaques |
+| Accent Amber | Warm Amber | `#FFB15C` | Realces e gradientes controlados |
+
+### Superfícies e fundos
+
+| Token | Nome | HEX | Responsabilidade |
+|---|---|---|---|
+| Background | Midnight Navy | `#07111F` | Fundo principal |
+| Surface | Deep Graphite | `#111C2B` | Cards e superfícies |
+| Surface Elevated | Elevated Graphite | `#172438` | Modais, menus e painéis elevados |
+| Border | Steel Blue | `#263449` | Bordas e divisores |
+
+### Tipografia
+
+| Token | Nome | HEX | Responsabilidade |
+|---|---|---|---|
+| Text Primary | Cloud White | `#F4F7FA` | Texto principal |
+| Text Secondary | Cool Silver | `#AAB7C7` | Texto auxiliar |
+| Text Muted | Muted Steel | `#8190A3` | Metadados e informação discreta |
+
+### Estados semânticos
+
+| Estado | Cor | HEX |
+|---|---|---|
+| Success | Green | `#22C55E` |
+| Warning | Amber | `#FBBF24` |
+| Error | Red | `#EF4444` |
+| Information | Blue | `#38BDF8` |
+
+Não utilizar laranja como substituto universal de sucesso, alerta ou erro.
+
+A cor semântica deverá ser acompanhada por texto, ícone ou outra indicação visual.
+
+## 2.2. Distribuição visual
+
+Como referência inicial:
+
+- Aproximadamente 70% de superfícies escuras.
+- Aproximadamente 20% de elementos neutros e tipografia.
+- Aproximadamente 10% de elementos de destaque em laranja.
+
+Esses valores representam uma orientação visual, não uma regra rígida de preenchimento ou CSS.
+
+O laranja deverá aparecer principalmente em:
+
+- Marca e elementos de identidade.
+- Botões de ação primária.
+- Links destacados.
+- Indicadores de navegação ativa.
+- Ícones de destaque.
+- Elementos selecionados.
+- Detalhes de gráficos.
+- Pequenos elementos gráficos de identidade.
+
+Evitar grandes áreas inteiramente preenchidas com laranja sem justificativa de hierarquia visual.
+
+## 2.3. Gradientes e efeitos luminosos
+
+Gradientes permitidos:
+
+- Electric Orange para Signal Orange.
+- Signal Orange para Warm Amber.
+- Laranja com transparência sobre fundos Midnight Navy.
+- Gradientes escuros para criar profundidade.
+
+Os gradientes devem ser discretos e utilizados com intenção.
+
+Aplicações recomendadas:
+
+- Hero section.
+- Elementos gráficos institucionais.
+- Separadores visuais.
+- Destaques de produtos.
+- Elementos de fundo em áreas específicas.
+
+Efeitos glow:
+
+- Permitidos em elementos selecionados.
+- Intensidade moderada.
+- Não utilizar glow em todos os botões, cards e ícones.
+- Evitar excesso de sombras coloridas.
+- Preservar legibilidade e contraste.
+
+Não transformar a interface em uma estética gaming ou cyberpunk.
+
+O resultado deverá continuar sendo uma plataforma corporativa de engenharia.
+
+---
+
+# 3. DESIGN SYSTEM E DESIGN TOKENS
+
+Criar um design system centralizado.
+
+As cores, tipografia, espaçamentos, raios, sombras, estados e dimensões deverão ser administrados por tokens reutilizáveis.
+
+Não espalhar valores HEX arbitrários pelos componentes.
+
+## 3.1. Organização dos tokens
+
+Criar uma estrutura organizada, por exemplo:
+
+- `tokens/colors`
+- `tokens/typography`
+- `tokens/spacing`
+- `tokens/radius`
+- `tokens/shadows`
+- `tokens/motion`
+- `tokens/breakpoints`
+
+A estrutura física poderá ser adaptada à stack escolhida, mas deverá preservar a separação conceitual.
+
+Criar variáveis CSS semânticas para uso na interface.
+
+Exemplo de referência:
+
+```css
+:root {
+  --color-primary: #FF6A00;
+  --color-primary-hover: #FF8A24;
+  --color-accent: #FFB15C;
+
+  --color-background: #07111F;
+  --color-surface: #111C2B;
+  --color-surface-elevated: #172438;
+  --color-border: #263449;
+
+  --color-text-primary: #F4F7FA;
+  --color-text-secondary: #AAB7C7;
+  --color-text-muted: #8190A3;
+
+  --color-success: #22C55E;
+  --color-warning: #FBBF24;
+  --color-error: #EF4444;
+  --color-information: #38BDF8;
+}
+```
+
+Este exemplo estabelece a nomenclatura e os valores de referência. Não impede a criação de aliases semânticos adicionais.
+
+## 3.2. Tipografia
+
+Utilizar uma família tipográfica moderna, adequada a uma plataforma técnica corporativa.
+
+Avaliar Inter ou uma alternativa equivalente.
+
+Definir tokens para:
+
+- Display.
+- Heading 1.
+- Heading 2.
+- Heading 3.
+- Body Large.
+- Body.
+- Body Small.
+- Caption.
+- Label.
+- Monospace.
+
+A tipografia deverá apresentar hierarquia clara entre conteúdo institucional, informações técnicas, metadados e dados operacionais.
+
+Não utilizar excesso de fontes diferentes.
+
+## 3.3. Espaçamento e geometria
+
+Adotar uma escala consistente de espaçamento baseada em múltiplos de 4px.
+
+Definir tokens para:
+
+- Espaçamento interno.
+- Espaçamento entre componentes.
+- Espaçamento entre seções.
+- Largura máxima de conteúdo.
+- Grid.
+- Raios de borda.
+- Elevação.
+- Sombras.
+
+A interface deverá ter respiro visual sem desperdício excessivo de espaço.
+
+## 3.4. Componentes básicos
+
+Construir componentes reutilizáveis:
+
+- Button.
+- IconButton.
+- Link.
+- Badge.
+- Card.
+- ProductCard.
+- ProductFamilyCard.
+- SectionHeader.
+- Navigation.
+- Breadcrumb.
+- Modal.
+- Dropdown.
+- Tabs.
+- Tooltip.
+- StatusIndicator.
+- DataMetric.
+- EmptyState.
+- ErrorState.
+- LoadingState.
+
+Cada componente deverá respeitar os tokens do design system.
+
+Não criar versões visualmente incompatíveis do mesmo componente em diferentes módulos.
+
+## 3.5. Estados de interação
+
+Definir estados consistentes:
+
+- Default.
+- Hover.
+- Focus.
+- Active.
+- Selected.
+- Disabled.
+- Loading.
+- Error.
+
+A interação deverá ser perceptível sem depender exclusivamente da cor.
+
+---
+
+# 4. ACESSIBILIDADE E CONTRASTE
+
+A acessibilidade é um requisito de engenharia.
+
+Adotar WCAG 2.2 nível AA como objetivo de conformidade.
+
+Verificar:
+
+- Contraste mínimo de 4.5:1 para texto normal.
+- Contraste mínimo de 3:1 para texto grande.
+- Contraste de 3:1 para elementos gráficos e componentes relevantes da interface.
+- Navegação integral por teclado.
+- Indicadores de foco visíveis.
+- Estrutura semântica de headings.
+- Labels acessíveis.
+- Textos alternativos para imagens informativas.
+- Estados de erro compreensíveis.
+- Uso correto de landmarks.
+- Compatibilidade com leitores de tela.
+- Respeito à preferência `prefers-reduced-motion`.
+
+Não assumir que todas as combinações da paleta são automaticamente acessíveis.
+
+Verificar individualmente os pares de cores utilizados.
+
+Em particular:
+
+- Não utilizar texto branco pequeno sobre Electric Orange sem validar o contraste.
+- Preferir texto Midnight Navy sobre botões laranja quando necessário.
+- Utilizar Cloud White sobre fundos escuros.
+- Utilizar Cool Silver para textos secundários, verificando o contraste real.
+- Não utilizar Muted Steel em textos pequenos essenciais sem validação.
+
+Criar testes ou verificações automatizadas de acessibilidade utilizando axe-core ou alternativa equivalente.
+
+Documentar problemas identificados e suas correções.
+
+---
+
+# 5. EXPERIÊNCIA VISUAL E LAYOUT
+
+A interface deverá ser dark-first.
+
+Não implementar um tema claro nesta primeira sprint.
+
+A arquitetura poderá permitir futuramente um tema alternativo, mas o tema oficial inicial será o escuro.
+
+## 5.1. Página inicial
+
+A página inicial deverá apresentar:
+
+- Navegação institucional.
+- Identidade TRIMINDSLABS.
+- Mensagem principal.
+- Apresentação do posicionamento tecnológico.
+- Acesso às famílias de produtos.
+- Destaques de engenharia.
+- Acesso ao conhecimento técnico.
+- Acesso à inteligência operacional.
+- Acesso destacado ao Engineering State Explorer.
+- Rodapé corporativo.
+
+A hero section poderá utilizar elementos gráficos abstratos relacionados a redes, sistemas distribuídos, inteligência e conectividade.
+
+Não utilizar imagens decorativas que prejudiquem a legibilidade.
+
+## 5.2. Navegação
+
+A navegação deverá contemplar:
+
+- Home.
+- Product Families.
+- Technical Knowledge.
+- Operational Intelligence.
+- Engineering State.
+- About.
+
+O Engineering State deverá ser um acesso identificável e direto, não escondido em uma seção secundária ou exclusivamente em um rodapé.
+
+O seletor de idiomas deverá contemplar PT, EN e ES.
+
+Links ativos deverão ser visualmente identificáveis.
+
+## 5.3. Cards e painéis
+
+Cards deverão utilizar:
+
+- Fundo Deep Graphite.
+- Bordas Steel Blue.
+- Texto Cloud White.
+- Destaques Signal Orange.
+- Estados interativos claros.
+
+Não aplicar glow indiscriminadamente.
+
+Cards técnicos deverão priorizar leitura e organização de informações.
+
+## 5.4. Responsividade
+
+Implementar experiência adequada para:
+
+- Desktop.
+- Notebook.
+- Tablet.
+- Smartphone.
+
+Não considerar a simples redução da largura como responsividade suficiente.
+
+Validar navegação, grids, tabelas, cards, menus, modais e tipografia em diferentes larguras.
+
+---
+
+# 6. REQUISITO OBRIGATÓRIO — ENGINEERING STATE EXPLORER
+
+## 6.1. Preservação da funcionalidade existente
+
+A V3 possui uma funcionalidade acessada pelo link **Access Engineering State**, associada ao Engineering Dashboard.
+
+Essa funcionalidade é parte importante da identidade técnica da TRIMINDSLABS e deverá obrigatoriamente existir na nova plataforma.
+
+**Não remover, simplificar a ponto de perder sua capacidade de consulta, substituir por uma página institucional ou reduzir a funcionalidade a um conjunto de indicadores estáticos.**
+
+O novo nome conceitual poderá ser:
+
+**Engineering State Explorer**
+
+O nome poderá ser ajustado editorialmente, mas a capacidade funcional deverá ser preservada.
+
+A apresentação visual poderá ser redesenhada para se adequar à identidade Orange Engineering — Balanced / Dark-first.
+
+A regra é preservar o mecanismo de consulta do estado dos repositórios, e não necessariamente reproduzir o layout antigo.
+
+## 6.2. Investigação obrigatória da V3
+
+Antes de implementar, examinar o código da V3 e localizar o mecanismo associado ao acesso Access Engineering State.
+
+Identificar e documentar:
+
+- Componente responsável pela interface.
+- Ponto de entrada e navegação.
+- Origem dos dados.
+- Mecanismo de consulta.
+- Integrações e endpoints utilizados.
+- Formato das respostas.
+- Modelo de identificação dos repositórios.
+- Lógica de apresentação do estado.
+- Filtros e critérios de pesquisa existentes.
+- Tratamento de falhas e indisponibilidade.
+- Dependências e configurações necessárias.
+
+É obrigatório distinguir o mecanismo funcional de consulta dos indicadores ou métricas estáticas eventualmente existentes no dashboard.
+
+Não confundir elementos visuais ou contadores estáticos com o mecanismo real de busca do estado dos repositórios.
+
+## 6.3. Preservação do mecanismo de busca
+
+A nova versão deverá preservar o mecanismo funcional de consulta utilizado pela V3.
+
+Isso significa:
+
+- Reutilizar ou adaptar a lógica de consulta existente, após inspeção técnica.
+- Preservar a origem real das informações.
+- Manter a identificação dos repositórios consultados.
+- Preservar os critérios de pesquisa que efetivamente existirem.
+- Preservar a semântica dos estados retornados.
+- Manter o tratamento de respostas, erros e indisponibilidade.
+- Não substituir a consulta real por arrays locais, JSON demonstrativo ou dados simulados.
+- Não implementar uma busca visual sem ligação com a fonte real.
+
+A adaptação deverá respeitar a arquitetura da nova plataforma.
+
+Não é obrigatório copiar componentes antigos ou carregar dependências desnecessárias da V3.
+
+É obrigatório preservar o comportamento funcional equivalente do mecanismo.
+
+Se a integração atual depender de uma API, serviço, endpoint ou outra fonte externa, identificar a dependência e documentar como ela será consumida no novo ambiente.
+
+Não alterar nem comprometer a fonte existente.
+
+Se alguma dependência não puder ser reproduzida no ambiente independente, documentar precisamente a limitação e propor uma solução compatível. Não declarar a funcionalidade como concluída enquanto a consulta real não tiver sido validada.
+
+## 6.4. Experiência funcional esperada
+
+O Engineering State Explorer deverá permitir que o visitante consulte o estado dos repositórios monitorados pela TRIMINDSLABS.
+
+Preservar as capacidades reais que forem encontradas na V3, incluindo, quando existentes:
+
+- Pesquisa por repositório.
+- Identificação dos projetos.
+- Consulta de estado.
+- Visualização dos resultados.
+- Contexto da última verificação.
+- Informações de atividade.
+- Detalhes adicionais disponíveis na fonte.
+- Tratamento de resultados vazios.
+- Tratamento de falhas de consulta.
+
+Não inventar filtros ou campos inexistentes na fonte de dados.
+
+A nova interface poderá melhorar a experiência por meio de:
+
+- Pesquisa mais clara.
+- Organização por repositório.
+- Filtros baseados nos campos reais.
+- Visualização detalhada de cada resultado.
+- Indicadores visuais consistentes.
+- Histórico, quando disponibilizado pela fonte.
+- Melhor apresentação em dispositivos móveis.
+
+## 6.5. Semântica dos estados
+
+A apresentação deve preservar a distinção entre:
+
+- Estado operacional.
+- Estado de atividade.
+- Estado de implementação.
+- Maturidade.
+- Resultado da última auditoria.
+- Ausência de dados.
+- Falha de consulta.
+
+Não converter automaticamente um conceito em outro.
+
+Não apresentar um repositório como `running`, `active` ou `production` sem evidência correspondente.
+
+Não tratar falha de consulta como repositório offline.
+
+Não transformar ausência de dados em estado positivo.
+
+Quando a consulta falhar, mostrar claramente que o estado não pôde ser obtido.
+
+A interface deverá informar, quando disponíveis, origem e momento da informação.
+
+## 6.6. Integração com Operational Intelligence
+
+O Engineering State Explorer será uma capacidade de consulta dentro do domínio de Operational Intelligence, mas deverá ter acesso próprio na navegação principal.
+
+Não fundir sua lógica com a camada editorial do Product Catalog.
+
+Não transformar o Technology Portfolio Management System em substituto da fonte operacional.
+
+O Ecosystem Audit e o Technology Portfolio continuam sendo sistemas independentes.
+
+O Engineering State Explorer deverá respeitar a origem e a responsabilidade de cada informação.
+
+## 6.7. Design e experiência
+
+Aplicar a identidade Orange Engineering:
+
+- Fundo Midnight Navy.
+- Painéis Deep Graphite.
+- Bordas Steel Blue.
+- Ações e destaques Electric Orange.
+- Texto Cloud White.
+- Estados semânticos com suas cores específicas.
+
+A interface deverá priorizar:
+
+- Pesquisa rápida.
+- Leitura clara.
+- Identificação imediata dos resultados.
+- Contexto operacional.
+- Transparência sobre a origem dos dados.
+
+Evitar transformar o Explorer em um dashboard decorativo com gráficos sem significado operacional.
+
+## 6.8. Testes obrigatórios
+
+Criar testes para comprovar:
+
+1. Acesso à página Engineering State.
+2. Execução da consulta real.
+3. Identificação correta dos repositórios.
+4. Apresentação dos resultados.
+5. Pesquisa e filtros efetivamente disponíveis.
+6. Tratamento de resultado vazio.
+7. Tratamento de erro de consulta.
+8. Distinção entre falha de consulta e estado offline.
+9. Apresentação dos estados semânticos.
+10. Comportamento responsivo.
+11. Navegação por teclado.
+12. Ausência de dados simulados apresentados como reais.
+
+Quando possível, utilizar testes de integração contra a fonte real em ambiente apropriado.
+
+Testes com mocks podem ser usados para validar cenários controlados, mas não substituem a validação real da integração.
+
+## 6.9. Critérios de aceitação específicos
+
+A funcionalidade somente será considerada preservada quando:
+
+- O acesso Engineering State estiver disponível na nova navegação.
+- A página estiver implementada.
+- O mecanismo real de consulta da V3 tiver sido identificado.
+- A nova plataforma estiver conectada à fonte real.
+- A pesquisa produzir resultados reais.
+- Os estados forem apresentados de acordo com a fonte.
+- Os erros forem tratados corretamente.
+- Não houver substituição por dados estáticos.
+- A experiência estiver adequada ao novo design system.
+- Os testes funcionais estiverem registrados.
+
+**Esta funcionalidade é obrigatória e não poderá ser postergada para uma sprint futura.**
+
+Se a consulta real não puder ser concluída, a sprint deverá ser reportada como parcialmente concluída, com a limitação explicitamente documentada.
+
+---
+
+# 7. MÓDULOS PRINCIPAIS
+
+## MÓDULO A — CORPORATE IDENTITY
+
+Responsável pela identidade e apresentação institucional da TRIMINDSLABS.
+
+Deverá contemplar:
+
+- Identidade corporativa.
+- Apresentação institucional.
+- Posicionamento tecnológico.
+- Visão e princípios de engenharia.
+- Áreas de atuação.
+- Competências e especialidades.
+- Informações de contato corporativo.
+
+Posicionamento oficial:
+
+**TRIMINDSLABS — Engineering Intelligent Systems**
+
+A comunicação deve transmitir engenharia de software, arquitetura de sistemas, inteligência artificial, cloud, plataformas e soluções empresariais.
+
+Não transformar o website em um currículo pessoal.
+
+Não expor o nome pessoal do responsável como elemento central da identidade corporativa.
+
+Não publicar emails pessoais. Utilizar aliases corporativos, como `contact@` e `contato@`, somente quando os endereços estiverem efetivamente configurados.
+
+## MÓDULO B — PRODUCT CATALOG
+
+Este será um dos módulos mais importantes.
+
+O catálogo deverá ser estruturado por famílias de produtos, com capacidade de apresentar:
+
+- Nome e identificação do produto.
+- Descrição institucional.
+- Problema que resolve.
+- Capacidades funcionais.
+- Arquitetura.
+- Tecnologias.
+- Componentes.
+- Versões.
+- Estado de desenvolvimento.
+- Maturidade.
+- Documentação técnica.
+- Imagens e demonstrações, quando disponíveis.
+- Links para repositório e demonstração pública, quando autorizados.
+
+A estrutura deve permitir cadastrar novos produtos por meio de dados tipados e validados, sem necessidade de desenvolver um novo componente de interface para cada produto.
+
+**Taxonomia inicial para avaliação:**
+
+1. Document Intelligence & Compliance.
+2. Logistics & Traceability.
+3. Geospatial Intelligence.
+4. Security & Trust.
+5. Integration & Platform Engineering.
+6. Cloud & AI Operations.
+7. Engineering Governance & Portfolio Intelligence.
+8. Developer Tools & Research.
+
+Essa taxonomia é uma proposta inicial, não um inventário definitivo.
+
+Antes de publicar a classificação, examine os projetos existentes e proponha ajustes quando necessário.
+
+**Atenção especial à identidade dos produtos:**
+
+- MiniRAG e MiniRAGv2 precisam ter suas identidades e evolução documentadas corretamente.
+- Compliance Evidence Engine e Compliance Engine V5 são soluções com responsabilidades distintas.
+- Trusted Compliance Agent não deve ser automaticamente tratado como sinônimo de todos os produtos de compliance.
+- TLP Next-Gen é uma plataforma web.
+- Object Scanner V2 é um componente/produto separado, não uma aplicação Android incorporada ao TLP.
+- Produtos, componentes, ferramentas internas, pesquisas, versões e sucessores não devem ser classificados indistintamente como produtos comerciais.
+
+Não inventar funcionalidades, clientes, integrações, certificações ou estados de produção.
+
+## MÓDULO C — TECHNICAL KNOWLEDGE
+
+Este módulo deverá representar a engenharia por trás dos produtos.
+
+Estruturar uma área de conhecimento técnico com:
+
+- Arquiteturas de referência.
+- Diagramas.
+- ADRs.
+- Tecnologias e frameworks.
+- Padrões de desenvolvimento.
+- Documentação técnica.
+- Estratégias de integração.
+- Princípios de segurança.
+- Observabilidade.
+- Engenharia de plataformas.
+- Cloud architecture.
+- AI engineering.
+- Documentação de evolução dos produtos.
+
+Os documentos deverão ter identificação, versão, categoria, data, produto relacionado e estado de publicação.
+
+Criar uma estrutura preparada para relacionar documentos técnicos com produtos, versões e componentes.
+
+ADRs devem preservar histórico e decisões anteriores. Não substituir decisões antigas silenciosamente.
+
+Não afirmar que um produto implementa uma arquitetura ou tecnologia apenas porque ela aparece como recomendação ou possibilidade futura.
+
+## MÓDULO D — OPERATIONAL INTELLIGENCE
+
+Este módulo deverá apresentar informações verificáveis sobre o ecossistema TRIMINDSLABS.
+
+Existem duas fontes independentes:
+
+**1. Technology Portfolio Management System**
+
+- Inventário de ativos tecnológicos.
+- Histórico de projetos.
+- Informações de investimento e valuation.
+- Maturidade e avaliação de engenharia.
+- Documentação de requisitos e ADRs.
+
+**2. Ecosystem Audit**
+
+- Estado operacional dos projetos monitorados.
+- Evidências de auditoria.
+- Histórico de verificações.
+- Indicadores de funcionamento.
+- Informações técnicas observadas.
+
+Esses sistemas são independentes e devem continuar independentes.
+
+A nova plataforma poderá consultar e apresentar informações de ambos, mas não deverá criar uma terceira fonte de verdade nem misturar os seus modelos de dados.
+
+O Engineering State Explorer deverá integrar este módulo como capacidade funcional própria, conforme especificado na seção 6.
+
+**Regras obrigatórias:**
+
+- Não criar métricas fictícias.
+- Não utilizar números estáticos para simular dados operacionais.
+- Não interpretar ausência de informação como sucesso.
+- Não confundir maturidade com estado operacional.
+- Não confundir implementação com disponibilidade.
+- Não transformar dados históricos em status atual.
+- Não considerar registros migrados como evidência de validação.
+- Não afirmar integração funcional antes de implementá-la e testá-la.
+
+Quando uma fonte ainda não estiver conectada, apresentar claramente o estado da integração.
+
+Não preencher lacunas com dados inventados.
+
+---
+
+# 8. MODELAGEM E ORGANIZAÇÃO DOS DADOS
+
+Criar uma camada de domínio independente da interface.
+
+A estrutura deverá contemplar, no mínimo, os seguintes conceitos:
+
+- CorporateProfile.
+- ProductFamily.
+- Product.
+- ProductVersion.
+- ProductComponent.
+- Technology.
+- ArchitectureDocument.
+- ADR.
+- TechnicalDocument.
+- OperationalSource.
+- OperationalEvidence.
+- RepositoryState.
+- RepositoryQuery.
+- PublicationStatus.
+
+Os nomes poderão ser ajustados durante o desenho técnico, desde que os conceitos e suas responsabilidades permaneçam claros.
+
+Requisitos:
+
+- Tipagem forte.
+- Validação de schemas.
+- Identificadores estáveis.
+- Relacionamentos explícitos.
+- Separação entre dados editoriais e operacionais.
+- Suporte a internacionalização.
+- Controle de publicação.
+- Histórico de versões.
+- Preparação para futuras integrações.
+
+Evitar dependências desnecessárias entre os módulos.
+
+A camada de apresentação não deve conter regras de negócio ou lógica de integração diretamente.
+
+A consulta de estado dos repositórios deverá possuir uma abstração própria, isolando a interface da implementação concreta da fonte de dados.
+
+---
+
+# 9. INTERNACIONALIZAÇÃO
+
+A plataforma deverá ser preparada para três idiomas:
+
+- Português.
+- Inglês.
+- Espanhol.
+
+O inglês deverá ser considerado uma língua prioritária para apresentação internacional da TRIMINDSLABS.
+
+A internacionalização precisa fazer parte da arquitetura desde o início.
+
+Não implementar traduções improvisadas espalhadas pelos componentes.
+
+Organizar recursos linguísticos e validar a existência das traduções necessárias.
+
+O conteúdo técnico deverá preservar termos consagrados da engenharia de software, sem traduções artificiais.
+
+A funcionalidade Engineering State Explorer também deverá estar disponível nos três idiomas, preservando identificadores técnicos, nomes de repositórios e valores originais retornados pelas fontes.
+
+---
+
+# 10. SEGURANÇA E CONFIABILIDADE
+
+Considerar desde a fundação:
+
+- Validação de entradas.
+- Proteção contra exposição acidental de segredos.
+- Gestão segura de configurações.
+- Separação entre ambientes.
+- Dependências controladas.
+- Segurança de links externos.
+- Cabeçalhos de segurança quando aplicáveis.
+- Tratamento consistente de erros.
+- Política de publicação de conteúdo.
+- Prevenção de exposição de informações internas.
+- Proteção de integrações e endpoints.
+- Limitação de requisições quando aplicável.
+- Tratamento seguro de respostas de serviços externos.
+
+Não colocar credenciais, tokens, chaves de API ou dados sensíveis no código ou nos arquivos públicos.
+
+Não implementar autenticação fictícia.
+
+Não criar uma área administrativa sem requisitos e estratégia de segurança definidos.
+
+A integração do Engineering State Explorer deverá respeitar as condições de acesso e exposição da fonte original. Não expor tokens ou credenciais no navegador.
+
+---
+
+# 11. TESTES E QUALIDADE
+
+A qualidade da fundação deverá ser comprovada por testes.
+
+Implementar:
+
+- Testes unitários da camada de domínio.
+- Testes dos schemas e validações.
+- Testes dos relacionamentos entre entidades.
+- Testes dos componentes principais.
+- Testes de internacionalização.
+- Testes de navegação.
+- Testes de estados de erro e ausência de dados.
+- Testes do Engineering State Explorer.
+- Testes da integração real com a fonte de repositórios.
+- Testes de build de produção.
+- Verificações estáticas e de tipagem.
+- Verificações de acessibilidade.
+- Verificações de consistência dos tokens de design.
+
+Não considerar testes que apenas verificam a existência de componentes como validação suficiente da arquitetura.
+
+A suíte deverá verificar regras e comportamentos relevantes.
+
+Testes com mocks deverão ser identificados como testes controlados, não como prova de integração real.
+
+Criar scripts claros e reproduzíveis para:
+
+- Instalação.
+- Desenvolvimento local.
+- Lint.
+- Type checking.
+- Testes.
+- Build.
+- Validação geral.
+
+---
+
+# 12. DOCUMENTAÇÃO E GOVERNANÇA
+
+Criar uma estrutura documental no repositório.
+
+Documentos iniciais esperados:
+
+- `README.md`
+- `docs/ARCHITECTURE.md`
+- `docs/DOMAIN-MODEL.md`
+- `docs/PRODUCT-CATALOG-MODEL.md`
+- `docs/OPERATIONAL-INTELLIGENCE.md`
+- `docs/ENGINEERING-STATE-EXPLORER.md`
+- `docs/ENGINEERING-STATE-INTEGRATION.md`
+- `docs/INTERNATIONALIZATION.md`
+- `docs/DESIGN-SYSTEM.md`
+- `docs/ACCESSIBILITY.md`
+- `docs/VISUAL-VALIDATION.md`
+- `docs/QUALITY-STRATEGY.md`
+- `docs/SECURITY.md`
+- `docs/ROADMAP.md`
+- `docs/adr/`
+
+Criar ADRs iniciais para as decisões realmente tomadas durante esta sprint.
+
+Sugestões de decisões que deverão ser avaliadas:
+
+- Arquitetura geral da aplicação.
+- Separação dos módulos de domínio.
+- Estratégia de modelagem e validação de dados.
+- Internacionalização.
+- Integração com Technology Portfolio Management System e Ecosystem Audit.
+- Preservação e adaptação do mecanismo Engineering State.
+- Design system e identidade visual.
+- Estratégia de testes e acessibilidade.
+
+Não criar ADRs que apenas formalizem decisões não discutidas ou não implementadas.
+
+---
+
+# 13. ESCOPO DA SPRINT 01
+
+O objetivo desta primeira sprint é construir uma fundação funcional e verificável.
+
+**Entregas obrigatórias:**
+
+1. Estrutura inicial do novo projeto.
+2. Arquitetura documentada.
+3. Organização modular.
+4. Modelos de domínio tipados.
+5. Schemas e validações.
+6. Estrutura inicial do catálogo de produtos.
+7. Estrutura de famílias de produtos.
+8. Preparação para os três idiomas.
+9. Estrutura inicial das quatro áreas principais.
+10. Navegação funcional.
+11. Interface institucional inicial.
+12. Página inicial.
+13. Página de catálogo.
+14. Página de detalhes de produto.
+15. Área inicial de conhecimento técnico.
+16. Área inicial de Operational Intelligence.
+17. Engineering State Explorer funcional.
+18. Investigação e documentação do mecanismo da V3.
+19. Integração real com a fonte de consulta dos repositórios.
+20. Design system centralizado.
+21. Paleta oficial implementada como tokens.
+22. Componentes reutilizáveis.
+23. Estados de interação.
+24. Validação de acessibilidade.
+25. Testes automatizados.
+26. Build de produção validado.
+27. Documentação técnica.
+28. ADRs iniciais.
+29. Evidências visuais das principais páginas.
+
+A interface deve ser funcional o suficiente para permitir uma avaliação real pelo navegador.
+
+Não é necessário completar nesta sprint todas as páginas, integrações e conteúdos definitivos.
+
+Entretanto, a estrutura deve demonstrar que a arquitetura suporta a evolução prevista.
+
+**O Engineering State Explorer não é uma entrega futura: faz parte do escopo obrigatório desta primeira sprint.**
+
+---
+
+# 14. FORA DO ESCOPO DESTA SPRINT
+
+Não executar nesta fase:
+
+- Alteração da V3.
+- Migração do domínio corporativo.
+- Substituição do website em produção.
+- Alterações nos pipelines da V3.
+- Integração operacional não documentada com sistemas externos.
+- Implementação de backend complexo sem necessidade demonstrada.
+- Criação de autenticação administrativa.
+- Publicação de dados fictícios.
+- Migração indiscriminada de todo o conteúdo antigo.
+- Configuração de produção definitiva.
+- Implementação de tema claro.
+- Criação de múltiplas paletas alternativas.
+- Substituição da identidade visual aprovada por escolhas estéticas arbitrárias.
+
+A nova plataforma deverá poder ser executada e validada em ambiente independente.
+
+---
+
+# 15. CRITÉRIOS DE ACEITAÇÃO
+
+A sprint somente poderá ser considerada concluída quando:
+
+- O projeto estiver organizado e executável.
+- A arquitetura estiver documentada.
+- Os quatro módulos estiverem representados na estrutura.
+- Os modelos de domínio estiverem tipados e validados.
+- O catálogo puder ser ampliado por dados estruturados.
+- A navegação principal funcionar.
+- A interface estiver acessível e responsiva.
+- A internacionalização estiver funcional.
+- A separação entre dados editoriais e operacionais estiver comprovada.
+- O design system estiver centralizado.
+- A paleta oficial estiver implementada.
+- Os componentes principais respeitarem os tokens.
+- O contraste estiver validado.
+- A navegação por teclado estiver funcional.
+- Os testes estiverem executando com resultados registrados.
+- O lint e o type checking estiverem aprovados.
+- O build de produção estiver concluído.
+- Não houver dependência operacional da V3.
+- Não houver alterações no domínio ou ambiente de produção atual.
+- O Engineering State Explorer estiver conectado à fonte real e funcionalmente validado.
+
+## Critério específico do Engineering State Explorer
+
+A funcionalidade somente poderá ser considerada concluída quando:
+
+- O acesso estiver disponível na navegação principal.
+- A página estiver implementada.
+- O mecanismo de consulta da V3 tiver sido identificado e documentado.
+- A nova plataforma estiver conectada à fonte real.
+- A pesquisa produzir resultados reais.
+- Os estados forem apresentados de acordo com a fonte.
+- Os erros forem tratados corretamente.
+- Não houver substituição por dados estáticos.
+- A experiência estiver adequada ao novo design system.
+- Os testes funcionais estiverem registrados.
+
+Se a consulta real não puder ser concluída, a sprint deverá ser reportada como parcialmente concluída.
+
+## Critério visual específico
+
+A plataforma deverá ser reconhecível como TRIMINDSLABS Orange Engineering.
+
+A validação deverá comprovar:
+
+- Identidade escura consistente.
+- Uso equilibrado do laranja.
+- Hierarquia tipográfica clara.
+- Consistência entre módulos.
+- Ausência de cores arbitrárias.
+- Contraste adequado.
+- Responsividade real.
+- Estados de interação perceptíveis.
+
+---
+
+# 16. RELATÓRIO FINAL DA SPRINT
+
+Ao concluir, apresentar um relatório técnico objetivo contendo:
+
+## A. Arquitetura
+
+- Stack escolhida e justificativa.
+- Estrutura de diretórios.
+- Módulos e responsabilidades.
+- Fluxo de dados.
+- Decisões arquiteturais.
+
+## B. Implementação
+
+- Funcionalidades efetivamente implementadas.
+- Componentes criados.
+- Modelos e schemas.
+- Páginas disponíveis.
+- Idiomas implementados.
+
+## C. Design System
+
+- Paleta implementada.
+- Tokens criados.
+- Componentes que utilizam os tokens.
+- Tipografia e espaçamentos.
+- Estados de interação.
+- Verificações de contraste.
+- Problemas de acessibilidade identificados e corrigidos.
+
+## D. Engineering State Explorer
+
+- Localização da implementação correspondente na V3.
+- Mecanismo de consulta identificado.
+- Fonte real dos dados.
+- Endpoints ou serviços utilizados.
+- Estratégia de integração adotada.
+- Funcionalidades preservadas.
+- Funcionalidades adaptadas.
+- Testes de integração realizados.
+- Evidências de consultas reais.
+- Limitações e riscos encontrados.
+
+## E. Qualidade
+
+- Quantidade de testes executados.
+- Testes aprovados e reprovados.
+- Resultado do lint.
+- Resultado do type checking.
+- Resultado do build.
+- Resultado das verificações de acessibilidade.
+- Problemas conhecidos.
+
+## F. Governança
+
+- ADRs criados.
+- Documentos produzidos.
+- Requisitos atendidos.
+- Requisitos parcialmente atendidos.
+- Requisitos não implementados.
+
+## G. Evidências visuais
+
+Apresentar capturas de tela de:
+
+- Home desktop.
+- Home mobile.
+- Catálogo.
+- Detalhes de produto.
+- Technical Knowledge.
+- Operational Intelligence.
+- Engineering State Explorer.
+
+Informar resoluções, navegador e observações relevantes.
+
+## H. Ambiente
+
+- Como executar localmente.
+- URL de preview, caso exista.
+- Instruções para validar a interface.
+- Dependências externas necessárias.
+
+## I. Próxima sprint
+
+- Pendências identificadas.
+- Riscos técnicos.
+- Proposta de Sprint 02.
+- Priorização recomendada.
+
+---
+
+# 17. ORIENTAÇÃO FINAL
+
+Trabalhe como um arquiteto de software e engenheiro responsável pela construção de uma plataforma corporativa de longo prazo.
+
+Não procure apenas produzir uma interface visualmente atraente.
+
+Priorize:
+
+- Arquitetura consistente.
+- Separação de responsabilidades.
+- Dados confiáveis.
+- Evolução controlada.
+- Observabilidade.
+- Segurança.
+- Testabilidade.
+- Documentação.
+- Sustentabilidade técnica.
+- Consistência visual.
+- Acessibilidade.
+- Preservação das capacidades funcionais existentes.
+
+A identidade **TRIMINDSLABS Orange Engineering — Balanced / Dark-first** é uma decisão aprovada para esta plataforma e deverá ser respeitada.
+
+O Engineering State Explorer é uma funcionalidade obrigatória e deverá preservar o mecanismo real de consulta dos repositórios existente na V3.
+
+Não introduza novas cores de identidade sem documentar e justificar a necessidade.
+
+Não declare concluído algo que não tenha sido implementado e validado.
+
+Não esconda limitações ou falhas.
+
+Se uma decisão importante não puder ser tomada com segurança, documente a questão, apresente alternativas e justifique a recomendação.
+
+**A entrega desta sprint deve ser uma plataforma TRIMINDSLABS inicial real, executável, documentada, visualmente consistente, funcional e auditável — não apenas um protótipo visual.**
