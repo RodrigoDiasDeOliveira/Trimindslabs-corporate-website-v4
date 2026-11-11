@@ -1,7 +1,27 @@
 import React from 'react';
 import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { Terminal, Shield, ArrowUpRight, Github } from 'lucide-react';
+import { Shield, ArrowUpRight, Github } from 'lucide-react';
+
+// Official brand marks delivered as SVGs; labels remain visible if a CDN is unavailable.
+// Keep the footer data-driven and avoid changing the institutional navigation.
+const technologies = [
+  ['Java', 'java'], ['C#', 'csharp'], ['.NET', 'dotnet'], ['Python', 'python'],
+  ['React', 'react'], ['TypeScript', 'typescript'], ['Spring Boot', 'springboot'],
+  ['FastAPI', 'fastapi'], ['Node.js', 'nodedotjs'], ['Next.js', 'nextdotjs'],
+  ['PostgreSQL', 'postgresql'], ['Redis', 'redis'], ['Neo4j', 'neo4j'],
+  ['pgvector', 'postgresql'], ['Docker', 'docker'], ['Kubernetes', 'kubernetes'],
+  ['Google Cloud', 'googlecloud'], ['Cloud Run', 'googlecloudrun'],
+  ['Azure', 'microsoftazure'], ['OCI', 'oracle'], ['AWS', 'amazonaws'],
+  ['Terraform', 'terraform'], ['RabbitMQ', 'rabbitmq'], ['Apache Kafka', 'apachekafka'],
+  ['Grafana', 'grafana'], ['Prometheus', 'prometheus'], ['GitHub', 'github'],
+  ['GitHub Actions', 'githubactions'], ['Gemini', 'googlegemini'],
+  ['OpenAI', 'openai'], ['Grok (xAI)', 'xai'],
+] as const;
+
+const brandIcon = (slug: string) =>
+  `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`;
+
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -120,6 +140,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
         </div>
+
+        {/* Compact technology signature: same font scale as the institutional footer. */}
+        <section aria-label="Technologies and frameworks" className="border-t border-[#263449]/70 pt-6 space-y-4">
+          <p className="text-xs text-[#AAB7C7] leading-relaxed">
+            Here at <span className="font-semibold text-[#F4F7FA]">TRIMINDS<span className="text-[#FF8A24]">LABS</span></span>, we use and abuse the following technologies &amp; frameworks.
+          </p>
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-4" aria-label="Technology stack">
+            {technologies.map(([name, slug]) => (
+              <li key={name} className="inline-flex items-center gap-1.5 min-w-0 text-[11px] text-[#AAB7C7]">
+                <img
+                  src={brandIcon(slug)}
+                  alt=""
+                  aria-hidden="true"
+                  width={16}
+                  height={16}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-4 w-4 shrink-0 object-contain brightness-0 invert opacity-90"
+                />
+                <span className="whitespace-nowrap">{name}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-[#263449]/70 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
