@@ -14,7 +14,7 @@ export const AUDIT_API_BASE = 'https://triminds-ecosystem-audit-72mbkllrqa-ew.a.
 export const GITHUB_API_URL = 'https://api.github.com/users/RodrigoDiasDeOliveira/repos?per_page=100';
 
 export interface AuditFetchResult<T> {
-  data: T;
+  data: T | null;
   source: 'LIVE_AUDIT_API' | 'CANONICAL_SNAPSHOT';
   timestamp: string;
   error?: string | null;
