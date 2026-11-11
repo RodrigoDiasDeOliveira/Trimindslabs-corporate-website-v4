@@ -30,10 +30,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # Temporary fallback for the repository's missing package-lock.json.
+        # Follow up by committing a lockfile and restoring npm ci + npm caching.
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
