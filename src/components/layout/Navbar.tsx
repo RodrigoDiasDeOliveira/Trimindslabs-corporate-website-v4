@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { SupportedLanguage } from '../../domain/types';
 import { Button } from '../ui/Button';
 import { Terminal, Globe, Menu, X } from 'lucide-react';
-import symbolImg from '../../assets/brand/trimindslabs-symbol.png';
-import primaryLockupImg from '../../assets/brand/trimindslabs-primary-lockup.png';
 
 interface NavbarProps {
   activeSection: string;
@@ -46,15 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           >
             {/* High-visibility symbol badge with orange ambient glow */}
             <div className="relative p-1 bg-[#010C1B] border border-[#263449] rounded-lg shadow-[0_0_14px_rgba(255,106,0,0.22)] group-hover:border-[#FF6A00]/70 group-hover:shadow-[0_0_20px_rgba(255,106,0,0.4)] transition-all flex items-center justify-center shrink-0">
-              <img
-                src={symbolImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/trimindslabs-symbol.png';
-                }}
-                alt="TRIMINDSLABS Geometric Symbol"
-                className="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
-                loading="eager"
-              />
+              <BrandIdentity variant="symbol" priority className="h-8 w-auto max-w-10 group-hover:scale-105 transition-transform" />
             </div>
             <div className="flex flex-col justify-center">
               <div className="flex items-center tracking-tight leading-none">
