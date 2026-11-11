@@ -120,7 +120,7 @@ export async function runAllTests(): Promise<{ results: TestResult[]; summary: {
   // 6. Live Ecosystem Audit API Contract Test
   await record('Integration: Ecosystem Audit live API connectivity & schema contract', async () => {
     const summary = await fetchAuditSummary(false);
-    if (!isAuditSummary(summary.data)) {
+    if (summary.source !== 'LIVE_AUDIT_API' || !summary.data || !isAuditSummary(summary.data)) {
       throw new Error('Ecosystem Audit summary failed schema assertion');
     }
     if (summary.data.summary_cards.total_repositories < 20) {
@@ -131,10 +131,10 @@ export async function runAllTests(): Promise<{ results: TestResult[]; summary: {
   // 7. Ecosystem Observations Test
   await record('Integration: Ecosystem Audit observations query and repository count', async () => {
     const obs = await fetchEcosystemObservations(false);
-    if (!Array.isArray(obs.data) || obs.data.length === 0) {
+    if (obs.source !== 'LIVE_AUDIT_API' || !Array.isArray(obs.data) || obs.data.length === 0) {
       throw new Error('Empty or invalid repository observations array');
     }
-    const sample = obs.data[0];
+    const sample = obs.data![0];
     if (!isRepositoryObservation(sample)) {
       throw new Error('Repository observation item failed schema assertion');
     }

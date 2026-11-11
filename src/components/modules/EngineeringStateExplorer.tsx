@@ -63,8 +63,8 @@ export const EngineeringStateExplorer: React.FC = () => {
       ]);
 
       setSummary(sumResult.data);
-      setObservations(obsResult.data);
-      setSourceProvenance(sumResult.source);
+      setObservations(obsResult.data || []);
+      setSourceProvenance(sumResult.source === 'LIVE_AUDIT_API' && obsResult.source === 'LIVE_AUDIT_API' ? 'LIVE_AUDIT_API' : 'CANONICAL_SNAPSHOT');
 
       if (sumResult.error || obsResult.error) {
         setErrorMessage(sumResult.error || obsResult.error || null);
@@ -181,7 +181,7 @@ export const EngineeringStateExplorer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <DataMetric
             label={t('explorer.cardStatus', 'Audit Engine Status')}
-            value={summary?.system_status || 'OPTIMAL'}
+            value={summary?.system_status || 'UNAVAILABLE'}
             subtext="Ecosystem Audit REST API"
             provenance="europe-west1 Cloud Run"
             accent
@@ -189,21 +189,21 @@ export const EngineeringStateExplorer: React.FC = () => {
           />
           <DataMetric
             label={t('explorer.cardObservedRepos', 'Observed Repositories')}
-            value={summary?.summary_cards.total_repositories || 32}
+            value={observations.length || '—'}
             subtext="Repositories in audit scope"
             provenance="Observed via GitHub API"
             icon={<Server className="w-4 h-4 text-[#38BDF8]" />}
           />
           <DataMetric
             label={t('explorer.cardPipelinePass', 'CI Pipeline Success')}
-            value={summary?.summary_cards.pipeline_success_rate || '100%'}
+            value={summary?.summary_cards.pipeline_success_rate || '—'}
             subtext="Tracked GitHub Actions"
             provenance="Verified Workflows"
             icon={<CheckCircle2 className="w-4 h-4 text-[#22C55E]" />}
           />
           <DataMetric
             label={t('explorer.cardSecurityCompliance', 'Security Compliance')}
-            value={summary?.summary_cards.security_compliance || 'NOT_MEASURED'}
+            value={summary?.summary_cards.security_compliance || '—'}
             subtext="Honest state per ADR-001"
             provenance="Automated Prober Required"
             icon={<HelpCircle className="w-4 h-4 text-[#8190A3]" />}
@@ -422,7 +422,7 @@ export const EngineeringStateExplorer: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono text-[#8190A3]">
             <div className="p-3 bg-[#07111F] rounded-lg border border-[#263449]">
               <span className="text-[#38BDF8] block font-semibold mb-1">Ecosystem Audit Engine:</span>
-              <span>{t('explorer.sourceAuditDesc', 'Ecosystem Audit monitors 32 repositories within formal audit scope.')}</span>
+              <span>{t('explorer.sourceAuditDesc', 'Ecosystem Audit repository count is obtained from live observations.')}</span>
             </div>
             <div className="p-3 bg-[#07111F] rounded-lg border border-[#263449]">
               <span className="text-[#22C55E] block font-semibold mb-1">GitHub Organization:</span>
