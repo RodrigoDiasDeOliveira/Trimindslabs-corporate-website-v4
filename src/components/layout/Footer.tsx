@@ -1,7 +1,7 @@
 import React from 'react';
+import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Terminal, Shield, ArrowUpRight, Github } from 'lucide-react';
-import primaryLockupImg from '../../assets/brand/trimindslabs-primary-lockup.png';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -17,14 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 1: Identity with Official Primary Lockup */}
           <div className="md:col-span-2 space-y-4">
             <div className="inline-block p-2 bg-[#010C1B] border border-[#263449] rounded-xl shadow-lg">
-              <img
-                src={primaryLockupImg}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/trimindslabs-primary-lockup.png';
-                }}
-                alt="TRIMINDSLABS — Engineering Intelligent Systems"
-                className="h-10 sm:h-12 w-auto object-contain rounded-md"
-              />
+              <BrandIdentity variant="horizontal" className="h-10 sm:h-12 w-auto max-w-full rounded-md" />
             </div>
             <p className="text-xs text-[#AAB7C7] max-w-md leading-relaxed">
               {t(
