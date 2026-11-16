@@ -14,16 +14,12 @@ import {
   BookOpen,
   CheckCircle2,
   Clock,
-  ArrowRight,
-  Palette
+  ArrowRight
 } from 'lucide-react';
-import symbolImg from '../../assets/brand/trimindslabs-symbol.png';
-import wordmarkImg from '../../assets/brand/trimindslabs-wordmark.png';
-import primaryLockupImg from '../../assets/brand/trimindslabs-primary-lockup.png';
 
 export const TechnicalKnowledge: React.FC = () => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'adrs' | 'gates' | 'pillars' | 'vocab' | 'brand'>('adrs');
+  const [activeTab, setActiveTab] = useState<'adrs' | 'gates' | 'pillars' | 'vocab'>('adrs');
   const [selectedAdrId, setSelectedAdrId] = useState<string>('ADR-001');
 
   const selectedAdr = adrDocuments.find((a) => a.id === selectedAdrId) || adrDocuments[0];
@@ -95,18 +91,6 @@ export const TechnicalKnowledge: React.FC = () => {
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>{t('knowledge.tabVocab', 'Technical Vocabulary')}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('brand')}
-            className={`flex items-center gap-2 px-4 py-2 text-xs font-mono font-medium rounded-lg transition-all cursor-pointer ${
-              activeTab === 'brand'
-                ? 'bg-[#111C2B] text-[#FF6A00] border border-[#FF6A00]'
-                : 'text-[#AAB7C7] hover:text-[#F4F7FA]'
-            }`}
-          >
-            <Palette className="w-3.5 h-3.5 text-[#FF8A24]" />
-            <span>{t('knowledge.tabBrand', 'Brand Assets & Identity (Option A)')}</span>
           </button>
         </div>
 
@@ -327,143 +311,6 @@ export const TechnicalKnowledge: React.FC = () => {
                 )}
               </div>
             ))}
-          </div>
-        )}
-
-        {/* TAB 5: Brand Assets (Option A) */}
-        {activeTab === 'brand' && (
-          <div className="space-y-8">
-            <div className="p-6 bg-[#111C2B] border border-[#263449] rounded-2xl space-y-3">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="text-xs font-mono text-[#FF8A24] uppercase font-semibold">
-                  TRIMINDSLABS Official Brand Assets — Option A
-                </div>
-                <span className="text-[11px] font-mono text-[#22C55E] bg-[#22C55E]/10 px-2 py-0.5 rounded border border-[#22C55E]/20 self-start sm:self-auto">
-                  Active Brand Standard
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-[#AAB7C7] leading-relaxed">
-                The official visual identity of TRIMINDSLABS is partitioned into three canonical assets:
-                the geometric symbol, the institutional wordmark, and the primary combined lockup.
-                Engineered in compliance with the Orange Engineering design system.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Asset 1: Símbolo Geométrico */}
-              <div className="p-6 bg-[#111C2B] border border-[#263449] rounded-xl flex flex-col justify-between space-y-4 group hover:border-[#FF8A24]/60 transition-colors">
-                <div className="space-y-2">
-                  <div className="text-xs font-mono text-[#FF6A00] font-semibold">
-                    1. trimindslabs-symbol.png
-                  </div>
-                  <h4 className="text-sm font-bold text-[#F4F7FA]">
-                    Símbolo Geométrico
-                  </h4>
-                  <p className="text-xs text-[#AAB7C7] leading-relaxed">
-                    Somente o símbolo geométrico. Ícone triangular facetado combinando Electric Orange (#FF6A00) e Midnight Navy. Utilizado em favicons, avatares e marcas compactas de navegação.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-[#010C1B] border border-[#263449] rounded-lg flex items-center justify-center min-h-[160px] shadow-inner">
-                  <img
-                    src={symbolImg}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/trimindslabs-symbol.png';
-                    }}
-                    alt="trimindslabs-symbol.png"
-                    className="max-h-24 w-auto object-contain group-hover:scale-105 transition-transform"
-                  />
-                </div>
-
-                <div className="pt-3 border-t border-[#263449]/70 flex items-center justify-between text-xs font-mono text-[#8190A3]">
-                  <span>384 × 312 px</span>
-                  <a
-                    href="/trimindslabs-symbol.png"
-                    download="trimindslabs-symbol.png"
-                    className="text-[#FF6A00] hover:text-[#FF8A24] font-semibold flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>Download</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Asset 2: Nome e Assinatura Institucional */}
-              <div className="p-6 bg-[#111C2B] border border-[#263449] rounded-xl flex flex-col justify-between space-y-4 group hover:border-[#38BDF8]/60 transition-colors">
-                <div className="space-y-2">
-                  <div className="text-xs font-mono text-[#38BDF8] font-semibold">
-                    2. trimindslabs-wordmark.png
-                  </div>
-                  <h4 className="text-sm font-bold text-[#F4F7FA]">
-                    Nome e Assinatura Institucional
-                  </h4>
-                  <p className="text-xs text-[#AAB7C7] leading-relaxed">
-                    Somente o nome e a assinatura institucional. Tipografia em Cloud White e Electric Orange (#FF6A00) com o lema oficial "Engineering Intelligent Systems".
-                  </p>
-                </div>
-
-                <div className="p-6 bg-[#010C1B] border border-[#263449] rounded-lg flex items-center justify-center min-h-[160px] shadow-inner">
-                  <img
-                    src={wordmarkImg}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/trimindslabs-wordmark.png';
-                    }}
-                    alt="trimindslabs-wordmark.png"
-                    className="max-h-14 w-auto object-contain group-hover:scale-105 transition-transform"
-                  />
-                </div>
-
-                <div className="pt-3 border-t border-[#263449]/70 flex items-center justify-between text-xs font-mono text-[#8190A3]">
-                  <span>1100 × 216 px</span>
-                  <a
-                    href="/trimindslabs-wordmark.png"
-                    download="trimindslabs-wordmark.png"
-                    className="text-[#38BDF8] hover:text-[#F4F7FA] font-semibold flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>Download</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Asset 3: Símbolo e Lettering Combinados */}
-              <div className="p-6 bg-[#111C2B] border border-[#263449] rounded-xl flex flex-col justify-between space-y-4 group hover:border-[#22C55E]/60 transition-colors">
-                <div className="space-y-2">
-                  <div className="text-xs font-mono text-[#22C55E] font-semibold">
-                    3. trimindslabs-primary-lockup.png
-                  </div>
-                  <h4 className="text-sm font-bold text-[#F4F7FA]">
-                    Símbolo e Lettering Combinados
-                  </h4>
-                  <p className="text-xs text-[#AAB7C7] leading-relaxed">
-                    Lockup primário completo. Símbolo e lettering combinados em proporção equilibrada. Versão oficial para cabeçalhos corporativos, documentos oficiais e OpenGraph share cards.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-[#010C1B] border border-[#263449] rounded-lg flex items-center justify-center min-h-[160px] shadow-inner">
-                  <img
-                    src={primaryLockupImg}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/trimindslabs-primary-lockup.png';
-                    }}
-                    alt="trimindslabs-primary-lockup.png"
-                    className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform"
-                  />
-                </div>
-
-                <div className="pt-3 border-t border-[#263449]/70 flex items-center justify-between text-xs font-mono text-[#8190A3]">
-                  <span>1556 × 320 px</span>
-                  <a
-                    href="/trimindslabs-primary-lockup.png"
-                    download="trimindslabs-primary-lockup.png"
-                    className="text-[#22C55E] hover:text-[#F4F7FA] font-semibold flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>Download</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         )}
       </div>
