@@ -157,6 +157,184 @@ export const productFamilies: ProductFamily[] = [
 
 export const canonicalProducts: Product[] = [
   {
+    "id": "trimindslabs-agent",
+    "familyId": "cloud_ops",
+    "name": "trimindslabs Agent",
+    "canonicalName": "Trimindlabs-Agent",
+    "subtitle": {
+      "en": "Controlled Agentic Execution & Verification Engine",
+      "pt": "Motor de Execução Agêntica Controlada e Verificação",
+      "es": "Motor de Ejecución Agéntica Controlada y Verificación"
+    },
+    "domain": "cloud_ops",
+    "tag": "Agentic AI / Governed Execution",
+    "sector": {
+      "en": "Applied AI engineering and controlled task automation",
+      "pt": "Engenharia de IA aplicada e automação controlada de tarefas",
+      "es": "Ingeniería de IA aplicada y automatización controlada de tareas"
+    },
+    "truthStatus": "partial",
+    "operationalStage": "validation",
+    "publicationStatus": "published",
+    "honestScope": {
+      "en": "Research prototype with three execution strategies, shared tool contracts and human approval. Independent verification is under validation; live LLM and neural retrieval are not yet verified. External transactions are simulated.",
+      "pt": "Protótipo de pesquisa com três estratégias de execução, contratos compartilhados e aprovação humana. Verificação independente em validação; LLM real e recuperação neural ainda não verificados. Transações externas simuladas.",
+      "es": "Prototipo de investigación con tres estrategias de ejecución, contratos compartidos y aprobación humana. Verificación independiente en validación; LLM real y recuperación neuronal aún no verificados. Transacciones externas simuladas."
+    },
+    "whatItProves": {
+      "en": "Demonstrates a modular approach to comparing execution strategies under shared governance in a controlled sandbox.",
+      "pt": "Demonstra uma abordagem modular para comparar estratégias de execução sob governança comum em sandbox controlado.",
+      "es": "Demuestra un enfoque modular para comparar estrategias de ejecución bajo gobernanza común en un entorno controlado."
+    },
+    "problem": {
+      "en": "Unrestricted agent autonomy can create unnecessary model calls, unsupported success claims and unsafe actions.",
+      "pt": "Autonomia irrestrita pode gerar chamadas desnecessárias ao modelo, declarações de sucesso sem evidência e ações inseguras.",
+      "es": "La autonomía sin restricciones puede generar llamadas innecesarias al modelo, declaraciones de éxito sin evidencia y acciones inseguras."
+    },
+    "context": {
+      "en": "Applied research prioritizing precision, performance, security and reliability over unrestricted autonomy.",
+      "pt": "Pesquisa aplicada que prioriza precisão, performance, segurança e confiabilidade em vez de autonomia irrestrita.",
+      "es": "Investigación aplicada que prioriza precisión, rendimiento, seguridad y fiabilidad frente a la autonomía sin restricciones."
+    },
+    "architecture": {
+      "overview": "Model-independent context and strategy engine with shared governed execution; independent verification layer under validation.",
+      "components": [
+        "Context Builder, budget and provenance",
+        "Working, episodic and semantic memory contracts; SQLite FTS5 lexical retrieval",
+        "ReAct, Plan-and-Execute and deterministic workflows; bounded reflection",
+        "Model and tool registries; shared contracts, risk gates and human approval",
+        "Independent verification and evidence registry (under validation)"
+      ],
+      "diagramText": "Objective → Context → Strategy → Governed Tool Execution → Observation → Independent Verification (under validation) → Result"
+    },
+    "realArchitectureVerification": {
+      "documented": "Sprint 0–3 engineering reports and ADR-001–007; Sprint 4 implementation under validation.",
+      "implemented": "Python backend, model adapters, SQLite FTS5, three strategies, shared execution pipeline and SSE workbench.",
+      "presentedOnSite": "Controlled research prototype; no production or live model performance claim.",
+      "coherenceScore": "NOT_MEASURED"
+    },
+    "realTechnologies": {
+      "languages": [
+        "Python 3.11",
+        "TypeScript"
+      ],
+      "frameworks": [
+        "Node.js / Express",
+        "React",
+        "Tailwind CSS"
+      ],
+      "libraries": [
+        "Google GenAI SDK (adapter; live execution pending)"
+      ],
+      "databases": [
+        "SQLite",
+        "SQLite FTS5 / BM25"
+      ],
+      "apis": [
+        "REST",
+        "Server-Sent Events"
+      ],
+      "testing": [
+        "Python unittest",
+        "TypeScript type checking"
+      ],
+      "observability": [
+        "Execution events",
+        "Context manifests",
+        "Strategy metrics"
+      ]
+    },
+    "repository": {
+      "name": "Trimindlabs-Agent",
+      "isPrivate": true,
+      "visibilityBadge": "PRIVATE_REPOSITORY",
+      "url": "https://github.com/RodrigoDiasDeOliveira/Trimindlabs-Agent",
+      "testSuiteStatus": "41/41 REPORTED (Sprint 3; sandbox)",
+      "ciCdPipeline": "NOT_VERIFIED",
+      "adrReferences": [
+        "ADR-001",
+        "ADR-002",
+        "ADR-003",
+        "ADR-004",
+        "ADR-005",
+        "ADR-006",
+        "ADR-007"
+      ]
+    },
+    "engineering": {
+      "en": [
+        "Explicit strategy selection and bounded execution",
+        "Shared risk and approval pipeline",
+        "Separate planner completion from evidence-based verification (under validation)"
+      ],
+      "pt": [
+        "Seleção explícita de estratégias e execução limitada",
+        "Pipeline compartilhado de risco e aprovação",
+        "Separação entre conclusão do planejador e verificação por evidências (em validação)"
+      ],
+      "es": [
+        "Selección explícita de estrategias y ejecución acotada",
+        "Pipeline compartido de riesgo y aprobación",
+        "Separación entre finalización del planificador y verificación por evidencias (en validación)"
+      ]
+    },
+    "evolution": {
+      "en": "From a ReAct baseline to model-independent context engineering and multiple execution strategies; independent verification in progress.",
+      "pt": "Da baseline ReAct à engenharia de contexto independente de modelos e múltiplas estratégias; verificação independente em andamento.",
+      "es": "De la base ReAct a la ingeniería de contexto independiente de modelos y múltiples estrategias; verificación independiente en curso."
+    },
+    "challenges": {
+      "en": [
+        "Validate live model and neural retrieval runtime",
+        "Strengthen isolation, recovery and idempotency",
+        "Benchmark accuracy, latency and resource consumption under comparable conditions"
+      ],
+      "pt": [
+        "Validar LLM real e recuperação neural em runtime",
+        "Reforçar isolamento, recuperação e idempotência",
+        "Medir precisão, latência e consumo em condições comparáveis"
+      ],
+      "es": [
+        "Validar LLM real y recuperación neuronal en ejecución",
+        "Reforzar aislamiento, recuperación e idempotencia",
+        "Medir precisión, latencia y consumo en condiciones comparables"
+      ]
+    },
+    "decisions": [
+      {
+        "decision": "Use deterministic mechanisms where sufficient.",
+        "rationale": "Reduce unnecessary probabilistic decisions and model calls."
+      },
+      {
+        "decision": "Keep authorization outside the model.",
+        "rationale": "Preserve human governance and shared policy enforcement."
+      }
+    ],
+    "results": [
+      {
+        "metric": "Execution strategies",
+        "value": "3",
+        "description": "ReAct, Plan-and-Execute and deterministic workflow tested in sandbox."
+      },
+      {
+        "metric": "Sprint 3 regression suite",
+        "value": "41/41 reported",
+        "description": "Mock models and simulated transactions; not independently rerun."
+      },
+      {
+        "metric": "Live performance",
+        "value": "NOT_MEASURED",
+        "description": "No live LLM benchmark or production runtime verified."
+      }
+    ],
+    "evidence": {
+      "en": "Sprint 3 completion report and repository inspection at e6c1b5e; Sprint 4 acceptance pending.",
+      "pt": "Relatório da Sprint 3 e inspeção do repositório no commit e6c1b5e; aceite da Sprint 4 pendente.",
+      "es": "Informe de Sprint 3 e inspección del repositorio en e6c1b5e; aceptación de Sprint 4 pendiente."
+    },
+    "deployment": null
+  },
+  {
     id: 'compliance-evidence-engine-v5',
     familyId: 'compliance',
     name: 'Compliance Evidence Engine v5',
