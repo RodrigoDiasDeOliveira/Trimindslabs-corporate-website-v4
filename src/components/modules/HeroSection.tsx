@@ -8,7 +8,9 @@ interface HeroSectionProps {
   onExploreState: () => void;
   onExploreCatalog: () => void;
   liveAuditStatus: string;
-  totalRepositories: number;
+  totalRepositories: number | null;
+  securityCompliance: string;
+  pipelineRate: string;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -16,6 +18,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onExploreCatalog,
   liveAuditStatus,
   totalRepositories,
+  securityCompliance,
+  pipelineRate,
 }) => {
   const { t } = useLanguage();
 
@@ -106,7 +110,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
               <span aria-hidden="true">·</span>
               <div className="text-[#F4F7FA]">
-                <span className="text-[#FF8A24] font-semibold">{totalRepositories}</span> Repositories in Scope
+                <span className="text-[#FF8A24] font-semibold">{totalRepositories ?? '—'}</span> Repositories in Scope
               </div>
               <span aria-hidden="true">·</span>
               <div className="text-[#AAB7C7]">100% CI Pipeline Success</div>
@@ -143,9 +147,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
                 <div className="p-3 bg-[#07111F] rounded-lg border border-[#263449]/70 text-[11px] space-y-1">
                   <div><span className="text-[#38BDF8]">"system_status"</span>: <span className="text-[#22C55E]">"{liveAuditStatus}"</span>,</div>
-                  <div><span className="text-[#38BDF8]">"total_repositories"</span>: <span className="text-[#FFB15C]">{totalRepositories}</span>,</div>
-                  <div><span className="text-[#38BDF8]">"pipeline_success_rate"</span>: <span className="text-[#22C55E]">"100%"</span>,</div>
-                  <div><span className="text-[#38BDF8]">"security_compliance"</span>: <span className="text-[#8190A3]">"NOT_MEASURED"</span>,</div>
+                  <div><span className="text-[#38BDF8]">"total_repositories"</span>: <span className="text-[#FFB15C]">{totalRepositories ?? '—'}</span>,</div>
+                  <div><span className="text-[#38BDF8]">"pipeline_success_rate"</span>: <span className="text-[#22C55E]">"{pipelineRate}"</span>,</div>
+                  <div><span className="text-[#38BDF8]">"security_compliance"</span>: <span className="text-[#8190A3]">"{securityCompliance}"</span>,</div>
                   <div><span className="text-[#38BDF8]">"cloud_run_region"</span>: <span className="text-[#F4F7FA]">"europe-west1"</span></div>
                 </div>
 
