@@ -201,8 +201,8 @@ export const EngineeringStateExplorer: React.FC = () => {
           <DataMetric
             label={t('explorer.cardSecurityCompliance', 'Security Compliance')}
             value={summary?.summary_cards.security_compliance || '—'}
-            subtext="Honest state per ADR-001"
-            provenance="Automated Prober Required"
+            subtext={summary?.summary_cards.security_coverage ? `${summary.summary_cards.security_coverage.repositories_assessed}/${summary.summary_cards.security_coverage.repositories} repositories assessed · ${summary.summary_cards.security_coverage.controls_passed + summary.summary_cards.security_coverage.controls_failed}/${summary.summary_cards.security_coverage.controls_expected} controls measured` : "Coverage unavailable"}
+            provenance="Ecosystem Audit API"
             icon={<HelpCircle className="w-4 h-4 text-[#8190A3]" />}
           />
         </div>
