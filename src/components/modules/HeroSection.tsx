@@ -115,7 +115,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span aria-hidden="true">·</span>
               <div className="text-[#AAB7C7]">100% CI Pipeline Success</div>
               <span aria-hidden="true">·</span>
-              <div className="text-[#8190A3]">Security: NOT_MEASURED</div>
+              <div className="text-[#8190A3]">Security: {securityCompliance === 'NOT_MEASURED' ? 'Assessment in Progress' : securityCompliance}</div>
             </div>
           </div>
 
@@ -149,7 +149,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <div><span className="text-[#38BDF8]">"system_status"</span>: <span className="text-[#22C55E]">"{liveAuditStatus}"</span>,</div>
                   <div><span className="text-[#38BDF8]">"total_repositories"</span>: <span className="text-[#FFB15C]">{totalRepositories ?? '—'}</span>,</div>
                   <div><span className="text-[#38BDF8]">"pipeline_success_rate"</span>: <span className="text-[#22C55E]">"{pipelineRate}"</span>,</div>
-                  <div><span className="text-[#38BDF8]">"security_compliance"</span>: <span className="text-[#8190A3]">"{securityCompliance}"</span>,</div>
+                  <div><span className="text-[#38BDF8]">"security_compliance"</span>: <span className="text-[#8190A3]">"{securityCompliance === 'NOT_MEASURED' ? 'Assessment in Progress' : securityCompliance}"</span>,</div>
                   <div><span className="text-[#38BDF8]">"cloud_run_region"</span>: <span className="text-[#F4F7FA]">"europe-west1"</span></div>
                 </div>
 

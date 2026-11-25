@@ -200,7 +200,7 @@ export const EngineeringStateExplorer: React.FC = () => {
           />
           <DataMetric
             label={t('explorer.cardSecurityCompliance', 'Security Compliance')}
-            value={summary?.summary_cards.security_compliance || '—'}
+            value={summary?.summary_cards.security_compliance === 'NOT_MEASURED' ? 'Assessment in Progress' : (summary?.summary_cards.security_compliance || '—')}
             subtext={summary?.summary_cards.security_coverage ? `${summary.summary_cards.security_coverage.repositories_assessed}/${summary.summary_cards.security_coverage.repositories} repositories assessed · ${summary.summary_cards.security_coverage.controls_passed + summary.summary_cards.security_coverage.controls_failed}/${summary.summary_cards.security_coverage.controls_expected} controls measured` : "Coverage unavailable"}
             provenance="Ecosystem Audit API"
             icon={<HelpCircle className="w-4 h-4 text-[#8190A3]" />}
@@ -413,7 +413,7 @@ export const EngineeringStateExplorer: React.FC = () => {
           <p className="text-xs text-[#AAB7C7] leading-relaxed">
             {t(
               'explorer.provenanceNote',
-              'According to ADR-001, Ecosystem Audit is the sole source of operational truth. Unmeasured attributes remain explicitly designated as NOT_MEASURED.'
+              'According to ADR-001, Ecosystem Audit is the sole source of operational truth. Security assessment in progress indicates incomplete verification, not certified compliance.'
             )}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono text-[#8190A3]">
