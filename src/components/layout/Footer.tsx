@@ -1,4 +1,5 @@
 import React from 'react';
+import { CookieConsent } from './CookieConsent';
 import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Shield, ArrowUpRight, Github } from 'lucide-react';
@@ -164,6 +165,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             ))}
           </ul>
         </section>
+
+        {/* Privacy preferences */}
+        <CookieConsent />
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-[#263449]/70 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
