@@ -15,15 +15,20 @@ import { fetchAuditSummary } from './services/auditService';
 export default function App() {
   const [activeSection, setActiveSection] = useState('overview');
   const [selectedProductFamily, setSelectedProductFamily] = useState<string>('all');
-  const [liveAuditStatus, setLiveAuditStatus] = useState('OPTIMAL');
-  const [totalRepositories, setTotalRepositories] = useState(32);
+  const [liveAuditStatus, setLiveAuditStatus] = useState('UNAVAILABLE');
+  const [totalRepositories, setTotalRepositories] = useState<number | null>(null);
+
+  const [securityCompliance, setSecurityCompliance] = useState('UNAVAILABLE');
+  const [pipelineRate, setPipelineRate] = useState('UNAVAILABLE');
 
   useEffect(() => {
     // Quick baseline query
     fetchAuditSummary(false).then((result) => {
       if (result.data) {
-        setLiveAuditStatus(result.data.system_status || 'OPTIMAL');
-        setTotalRepositories(result.data.summary_cards?.total_repositories || 32);
+        setLiveAuditStatus(result.data.system_status || 'UNAVAILABLE');
+        setSecurityCompliance(result.data.summary_cards?.security_compliance || 'UNAVAILABLE');
+        setPipelineRate(result.data.summary_cards?.pipeline_success_rate || 'UNAVAILABLE');
+        setTotalRepositories(result.data.summary_cards?.total_repositories ?? null);
       }
     });
   }, []);
@@ -67,6 +72,8 @@ export default function App() {
               onExploreCatalog={() => handleNavigate('products')}
               liveAuditStatus={liveAuditStatus}
               totalRepositories={totalRepositories}
+              securityCompliance={securityCompliance}
+              pipelineRate={pipelineRate}
             />
             <PrinciplesSection />
             <CompetenciesSection onSelectFamily={handleSelectFamily} />

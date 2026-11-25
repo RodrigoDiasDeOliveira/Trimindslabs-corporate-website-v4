@@ -175,6 +175,7 @@ export interface AuditSummary {
     total_repositories: number;
     pipeline_success_rate: string;
     security_compliance: string;
+    security_coverage?: { repositories: number; repositories_assessed: number; controls_expected: number; controls_passed: number; controls_failed: number } | null;
     active_deployments?: number | null;
   };
   audit_logs: AuditLogItem[];
