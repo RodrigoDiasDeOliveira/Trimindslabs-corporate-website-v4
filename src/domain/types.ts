@@ -168,7 +168,20 @@ export interface AuditLogItem {
   timestamp: string;
 }
 
+export interface EngineeringMetrics {
+  test_files_count?: number | null;
+  adr_count?: number | null;
+  tests_executed?: number | null;
+  tests_passed?: number | null;
+  tests_failed?: number | null;
+  repositories_assessed?: number | null;
+  repositories_in_scope?: number | null;
+  observed_at?: string | null;
+  collection_status?: string | null;
+}
+
 export interface AuditSummary {
+  engineering_metrics?: EngineeringMetrics | null;
   system_status: string;
   last_audit_timestamp: string;
   summary_cards: {
