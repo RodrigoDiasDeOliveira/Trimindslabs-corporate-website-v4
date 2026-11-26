@@ -10,6 +10,7 @@ import { TechnicalKnowledge } from './components/modules/TechnicalKnowledge';
 import { OperationalIntelligence } from './components/modules/OperationalIntelligence';
 import { EngineeringStateExplorer } from './components/modules/EngineeringStateExplorer';
 import { ContactSection } from './components/modules/ContactSection';
+import type { EngineeringMetrics } from './domain/types';
 import { fetchAuditSummary } from './services/auditService';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
   const [totalRepositories, setTotalRepositories] = useState<number | null>(null);
 
   const [securityCompliance, setSecurityCompliance] = useState('UNAVAILABLE');
+  const [engineeringMetrics, setEngineeringMetrics] = useState<EngineeringMetrics | null>(null);
   const [pipelineRate, setPipelineRate] = useState('UNAVAILABLE');
 
   useEffect(() => {
@@ -28,6 +30,7 @@ export default function App() {
         setLiveAuditStatus(result.data.system_status || 'UNAVAILABLE');
         setSecurityCompliance(result.data.summary_cards?.security_compliance || 'UNAVAILABLE');
         setPipelineRate(result.data.summary_cards?.pipeline_success_rate || 'UNAVAILABLE');
+        setEngineeringMetrics(result.source === 'LIVE_AUDIT_API' ? result.data.engineering_metrics ?? null : null);
         setTotalRepositories(result.data.summary_cards?.total_repositories ?? null);
       }
     });
@@ -74,6 +77,7 @@ export default function App() {
               totalRepositories={totalRepositories}
               securityCompliance={securityCompliance}
               pipelineRate={pipelineRate}
+              engineeringMetrics={engineeringMetrics}
             />
             <PrinciplesSection />
             <CompetenciesSection onSelectFamily={handleSelectFamily} />
