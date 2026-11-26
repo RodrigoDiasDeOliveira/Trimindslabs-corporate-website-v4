@@ -1,4 +1,5 @@
 import React from 'react';
+import type { EngineeringMetrics } from '../../domain/types';
 import { BrandIdentity } from '../ui/BrandIdentity';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../ui/Button';
@@ -11,6 +12,7 @@ interface HeroSectionProps {
   totalRepositories: number | null;
   securityCompliance: string;
   pipelineRate: string;
+  engineeringMetrics?: EngineeringMetrics | null;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -20,8 +22,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   totalRepositories,
   securityCompliance,
   pipelineRate,
+  engineeringMetrics,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const labels = {
+    en: ['Test files', 'ADRs', 'Executed tests', 'Test success rate', 'Repository coverage', 'Engineering evidence'],
+    pt: ['Arquivos de testes', 'ADRs', 'Testes executados', 'Taxa de aprovação', 'Cobertura de repositórios', 'Evidências de engenharia'],
+    es: ['Archivos de pruebas', 'ADRs', 'Pruebas ejecutadas', 'Tasa de aprobación', 'Cobertura de repositorios', 'Evidencias de ingeniería'],
+  }[language];
+  const valid = (v: unknown): v is number => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0;
+  const m = engineeringMetrics;
+  const rows: [string, string][] = [];
+  if (m && (m.collection_status === 'COMPLETE' || m.collection_status === 'PARTIAL') && typeof m.observed_at === 'string' && Number.isFinite(Date.parse(m.observed_at))) {
+    const age = Date.now() - Date.parse(m.observed_at);
+    if (age >= 0 && age <= 86400000) {
+      [m.test_files_count, m.adr_count, m.tests_executed].forEach((v, i) => {
+        if (valid(v)) rows.push([labels[i], v.toLocaleString(language)]);
+      });
+      if (valid(m.tests_executed) && m.tests_executed > 0 && valid(m.tests_passed) && valid(m.tests_failed) && m.tests_passed + m.tests_failed === m.tests_executed)
+        rows.push([labels[3], (m.tests_passed / m.tests_executed).toLocaleString(language, {style: 'percent', maximumFractionDigits: 1})]);
+      if (valid(m.repositories_assessed) && valid(m.repositories_in_scope) && m.repositories_assessed <= m.repositories_in_scope)
+        rows.push([labels[4], m.repositories_assessed + '/' + m.repositories_in_scope]);
+    }
+  }
 
   return (
     <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 border-b border-[#263449] bg-gradient-to-b from-[#07111F] via-[#07111F] to-[#111C2B]/60">
@@ -113,10 +136,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <span className="text-[#FF8A24] font-semibold">{totalRepositories ?? '—'}</span> Repositories in Scope
               </div>
               <span aria-hidden="true">·</span>
-              <div className="text-[#AAB7C7]">100% CI Pipeline Success</div>
+              <div className="text-[#AAB7C7]">{pipelineRate} CI Pipeline Success</div>
               <span aria-hidden="true">·</span>
               <div className="text-[#8190A3]">Security: {securityCompliance === 'NOT_MEASURED' ? 'Assessment in Progress' : securityCompliance}</div>
             </div>
+            {rows.length > 0 && (
+              <div className="border-t border-[#263449]/70 pt-4 space-y-2">
+                <h2 className="text-xs font-mono text-[#AAB7C7] uppercase">{labels[5]}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {rows.map(([label, value]) => (
+                    <div key={label} className="p-3 border border-[#263449] rounded-lg">
+                      <div className="text-lg font-semibold text-[#FF8A24]">{value}</div>
+                      <div className="text-xs text-[#AAB7C7]">{label}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-[#8190A3]">Ecosystem Audit · {m?.collection_status} · {new Date(m!.observed_at!).toLocaleString(language)}</p>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Architectural Terminal / Interactive Preview */}
