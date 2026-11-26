@@ -8,6 +8,7 @@ export interface DataMetricProps {
   provenance?: string;
   icon?: React.ReactNode;
   accent?: boolean;
+  compactValue?: boolean;
 }
 
 export const DataMetric: React.FC<DataMetricProps> = ({
@@ -18,9 +19,10 @@ export const DataMetric: React.FC<DataMetricProps> = ({
   provenance,
   icon,
   accent = false,
+  compactValue = false,
 }) => {
   return (
-    <div className="p-4 sm:p-5 bg-[#111C2B] border border-[#263449] rounded-xl hover:border-[#374B67] transition-colors shadow-sm flex flex-col justify-between">
+    <div className="min-w-0 p-4 sm:p-5 bg-[#111C2B] border border-[#263449] rounded-xl hover:border-[#374B67] transition-colors shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between gap-2 mb-2">
         <span className="text-xs font-mono text-[#8190A3] uppercase tracking-wider">
           {label}
@@ -28,9 +30,9 @@ export const DataMetric: React.FC<DataMetricProps> = ({
         {icon && <span className="text-[#AAB7C7]">{icon}</span>}
       </div>
 
-      <div className="flex items-baseline gap-1.5 my-1">
+      <div className="flex min-w-0 flex-wrap items-baseline gap-1.5 my-1">
         <span
-          className={`font-mono text-2xl sm:text-3xl font-bold tabular-nums tracking-tight ${
+          className={`min-w-0 max-w-full whitespace-normal [overflow-wrap:anywhere] font-mono ${compactValue ? 'text-lg sm:text-xl leading-tight' : 'text-2xl sm:text-3xl'} font-bold tabular-nums tracking-tight ${
             accent ? 'text-[#FF6A00]' : 'text-[#F4F7FA]'
           }`}
         >
