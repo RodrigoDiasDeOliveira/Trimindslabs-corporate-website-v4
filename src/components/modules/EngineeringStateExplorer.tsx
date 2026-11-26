@@ -86,6 +86,15 @@ export const EngineeringStateExplorer: React.FC = () => {
     }
   };
 
+  const securityStatus = summary?.summary_cards.security_compliance;
+  const securityLabels: Record<string, Record<string, string>> = {
+    PARTIALLY_VERIFIED: { en: 'Partially verified', pt: 'Parcialmente verificado', es: 'Parcialmente verificado' },
+    VERIFIED: { en: 'Verified', pt: 'Verificado', es: 'Verificado' },
+    NOT_MEASURED: { en: 'Assessment in progress', pt: 'Avaliação em andamento', es: 'Evaluación en curso' },
+    ACTION_REQUIRED: { en: 'Action required', pt: 'Ação necessária', es: 'Acción necesaria' },
+    STALE_EVIDENCE: { en: 'Stale evidence', pt: 'Evidência desatualizada', es: 'Evidencia desactualizada' },
+  };
+
   // Filter repositories
   const filteredObservations = observations.filter((item) => {
     if (statusFilter === 'DEPLOYMENTS') {
@@ -200,7 +209,8 @@ export const EngineeringStateExplorer: React.FC = () => {
           />
           <DataMetric
             label={t('explorer.cardSecurityCompliance', 'Security Compliance')}
-            value={summary?.summary_cards.security_compliance === 'NOT_MEASURED' ? 'Assessment in Progress' : (summary?.summary_cards.security_compliance || '—')}
+            value={securityStatus ? (securityLabels[securityStatus]?.[language] || securityStatus.replace(/_/g, ' ')) : '—'}
+            compactValue
             subtext={summary?.summary_cards.security_coverage ? `${summary.summary_cards.security_coverage.repositories_assessed}/${summary.summary_cards.security_coverage.repositories} repositories assessed · ${summary.summary_cards.security_coverage.controls_passed + summary.summary_cards.security_coverage.controls_failed}/${summary.summary_cards.security_coverage.controls_expected} controls measured` : "Coverage unavailable"}
             provenance="Ecosystem Audit API"
             icon={<HelpCircle className="w-4 h-4 text-[#8190A3]" />}
